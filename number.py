@@ -22,6 +22,19 @@ class Number:
 
         return True
 
+    def copy(self):
+        return self.__class__(*self.digits, is_reversed=False, is_positive=self.is_positive)
+
+    def opposite(self):
+        if self != self.__class__(Digits.zero):
+            return self.__class__(*self.digits, is_reversed=False, is_positive=not self.is_positive)
+        return self.copy()
+
+    def __abs__(self):
+        if self.is_positive:
+            return self.copy()
+        return self.opposite()
+
     def next(self):
         new_digits = []
         if self == self.__class__(Digits.one, is_positive=False):
@@ -45,14 +58,32 @@ class Number:
 
         return self.__class__(*new_digits, is_reversed=False, is_positive=self.is_positive)
 
-    def copy(self):
-        return self.__class__(*self.digits, is_reversed=False, is_positive=self.is_positive)
+    def previous(self):
+        rtn = self.opposite()
+        rtn = rtn.next()
+        return rtn.opposite()
 
     def __add__(self, other):
         counter = self.__class__(Digits.zero)
         rtn = self.copy()
         while counter != other:
-            rtn = rtn.next()
+            if other.is_positive:
+                rtn = rtn.next()
+                counter = counter.next()
+            else:
+                rtn = rtn.previous()
+                counter = counter.previous()
+        return rtn
+
+    def __mul__(self, other):
+        counter = self.__class__(Digits.zero)
+        rtn = self.__class__(Digits.zero)
+        if other.is_positive:
+            addend = self.copy()
+        else:
+            addend = self.opposite()
+        while counter != abs(other):
+            rtn = rtn + addend
             counter = counter.next()
         return rtn
 

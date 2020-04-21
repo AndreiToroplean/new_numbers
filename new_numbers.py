@@ -8,10 +8,10 @@ def main():
     b = Number(Digits.two, Digits.five)
     c = Number(Digits.five, is_positive=False)
     d = Number(Digits.one, is_positive=False)
+    e = Number(Digits.three)
+    f = Number(Digits.five)
 
-    # print(b.next())
-
-    print(b + b)
+    print(b*e)
 
 
 if __name__ == '__main__':
