@@ -90,8 +90,40 @@ class Number:
     def __repr__(self):
         rtn = ""
         if not self.is_positive:
-            rtn += "negative-"
-        for digit in reversed(self.digits[1:]):
-            rtn += f"{digit}-"
-        rtn += f"{self.digits[0]}"
+            rtn += "negative "
+
+        has_hundreds = False
+        has_tens = False
+        is_first = True
+        for index, digit in reversed(list(enumerate(self.digits))):
+            if digit != Digits.zero or is_first:
+                if has_hundreds:
+                    rtn += " and"
+                    has_hundreds = False
+                if index % 3 == 1:
+                    if not is_first:
+                        rtn += " "
+                    rtn += digit.tens
+                    has_tens = True
+                else:
+                    if has_tens:
+                        rtn += "-"
+                        has_tens = False
+                    elif not is_first:
+                        rtn += " "
+                    rtn += repr(digit)
+                if index % 3 == 2:
+                    rtn += " hundred"
+                    has_hundreds = True
+                is_first = False
+            if index == 0:
+                continue
+            if index == 3:
+                rtn += " thousand"
+            elif index == 6:
+                rtn += " million"
+            elif index == 9:
+                rtn += " billion"
+            elif index % 3 == 0:
+                rtn += " zillion"
         return rtn

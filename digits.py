@@ -2,16 +2,16 @@ from digit import Digit
 
 
 class Digits:
-    zero = Digit("zero")
-    one = Digit("one")
-    two = Digit("two")
-    three = Digit("three")
-    four = Digit("four")
-    five = Digit("five")
-    six = Digit("six")
-    seven = Digit("seven")
-    eight = Digit("eight")
-    nine = Digit("nine")
+    zero = Digit("zero", "")
+    one = Digit("one", "ten")
+    two = Digit("two", "twenty")
+    three = Digit("three", "thirty")
+    four = Digit("four", "forty")
+    five = Digit("five", "fifty")
+    six = Digit("six", "sixty")
+    seven = Digit("seven", "seventy")
+    eight = Digit("eight", "eighty")
+    nine = Digit("nine", "ninety")
 
     digits = zero, one, two, three, four, five, six, seven, eight, nine
 
