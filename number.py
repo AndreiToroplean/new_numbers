@@ -95,23 +95,31 @@ class Number:
         has_hundreds = False
         has_tens = False
         is_first = True
+        is_teen = False
         for index, digit in reversed(list(enumerate(self.digits))):
-            if digit != Digits.zero or is_first:
+            if digit != Digits.zero or is_first or is_teen:
                 if has_hundreds:
                     rtn += " and"
                     has_hundreds = False
                 if index % 3 == 1:
                     if not is_first:
                         rtn += " "
-                    rtn += digit.tens
-                    has_tens = True
+                    if digit != Digits.one:
+                        rtn += digit.tens
+                        has_tens = True
+                    else:
+                        is_teen = True
                 else:
                     if has_tens:
                         rtn += "-"
                         has_tens = False
-                    elif not is_first:
+                    elif not is_first and not is_teen:
                         rtn += " "
-                    rtn += repr(digit)
+                    if not is_teen:
+                        rtn += repr(digit)
+                    else:
+                        rtn += digit.teen
+                        is_teen = False
                 if index % 3 == 2:
                     rtn += " hundred"
                     has_hundreds = True
@@ -119,11 +127,11 @@ class Number:
             if index == 0:
                 continue
             if index == 3:
-                rtn += " thousand"
+                rtn += " thousand,"
             elif index == 6:
-                rtn += " million"
+                rtn += " million,"
             elif index == 9:
-                rtn += " billion"
+                rtn += " billion,"
             elif index % 3 == 0:
-                rtn += " zillion"
+                rtn += " zillion,"
         return rtn
