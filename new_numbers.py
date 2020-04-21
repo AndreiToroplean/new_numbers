@@ -4,12 +4,12 @@ from number import Number
 
 def main():
 
-    one_hundred = Number(Digits.one, Digits.zero, Digits.zero)
-    # ten = Number(one, zero)
+    a = Number(Digits.one, Digits.zero, Digits.zero)
+    b = Number(Digits.two, Digits.five)
 
-    # print(one_hundred + ten)
+    print(b.next())
 
-    print(Number.next(one_hundred))
+    # print(a + b)
 
 
 if __name__ == '__main__':

@@ -2,8 +2,11 @@ from digits import Digits
 
 
 class Number:
-    def __init__(self, *digits):
-        self.digits = list(reversed(digits))
+    def __init__(self, *digits, is_reversed=True):
+        if is_reversed:
+            self.digits = list(reversed(digits))
+        else:
+            self.digits = list(digits)
 
     @classmethod
     def _next_from_digits(cls, digits):
@@ -17,10 +20,11 @@ class Number:
         return new_digits
 
     def next(self):
-        return self.__init__(self._next_from_digits(self.digits))
+        return Number(*self._next_from_digits(self.digits), is_reversed=False)
 
-    def __str__(self):
+    def __repr__(self):
         rtn = ""
-        for digit in self.digits:
-            rtn += digit + " "
+        for digit in reversed(self.digits[1:]):
+            rtn += f"{digit}-"
+        rtn += f"{self.digits[0]}"
         return rtn

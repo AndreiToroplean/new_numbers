@@ -2,5 +2,5 @@ class Digit:
     def __init__(self, value):
         self.value = value
 
-    def __str__(self):
+    def __repr__(self):
         return self.value
