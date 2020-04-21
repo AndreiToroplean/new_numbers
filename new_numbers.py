@@ -11,5 +11,6 @@ def main():
 
     print(Number(Digits.one, Digits.one, Digits.one, Digits.one, Digits.one, Digits.one, Digits.one, Digits.one, Digits.one, Digits.one, ))
 
+
 if __name__ == '__main__':
     main()
