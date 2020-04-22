@@ -87,6 +87,18 @@ class Number:
             counter = counter.next()
         return rtn
 
+    def __pow__(self, power):
+        counter = self.__class__(Digits.zero)
+        rtn = self.__class__(Digits.one)
+        if power.is_positive:
+            multiplier = self.copy()
+        else:
+            return NotImplemented
+        while counter != power:
+            rtn = rtn * multiplier
+            counter = counter.next()
+        return rtn
+
     def __repr__(self):
         rtn = ""
         if not self.is_positive:

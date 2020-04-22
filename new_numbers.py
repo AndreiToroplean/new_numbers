@@ -3,13 +3,12 @@ from number import Number
 
 
 def main():
-    num = Number(Digits.zero)
+    a = Number(Digits.eight)
+    b = Number(Digits.seven)
 
-    while num != Number(Digits.one, Digits.zero, Digits.one):
-        print(num)
-        num = num.next()
-
-    print(Number(Digits.one, Digits.one, Digits.one, Digits.one, Digits.one, Digits.one, Digits.one, Digits.one, Digits.one, Digits.one, ))
+    print(f"{a} + {b} = {a + b}")
+    print(f"{a} * {b} = {a * b}")
+    print(f"{a} ** {b} = {a ** b}")
 
 
 if __name__ == '__main__':
