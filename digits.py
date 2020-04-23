@@ -1,5 +1,3 @@
-from enum import Enum
-
 from digit import Digit
 
 
