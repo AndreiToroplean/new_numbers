@@ -12,6 +12,8 @@ def main():
     print(f"{a} * {b} = {a * b}")
     print(f"{a} ** {b} = {a ** b}")
 
+    print()
+
 
 if __name__ == '__main__':
     main()
