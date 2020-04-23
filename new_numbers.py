@@ -1,7 +1,9 @@
 from digits import Digits
 from number import Number
+from timer import timer
 
 
+@timer
 def main():
     a = Number(Digits.eight)
     b = Number(Digits.seven)
