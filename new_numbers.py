@@ -1,6 +1,6 @@
 from digits import Digits
 from number import Number
-from timer import timer
+from utilities import timer
 
 
 @timer

@@ -25,17 +25,23 @@ class Number:
     def copy(self):
         return self.__class__(*self.digits, is_reversed=False, is_positive=self.is_positive)
 
-    def opposite(self):
-        if self != self.__class__(Digits.zero):
-            return self.__class__(*self.digits, is_reversed=False, is_positive=not self.is_positive)
-        return self.copy()
+    def opposite(self, in_place=False):
+        is_zero = self == self.__class__(Digits.zero)
+        if in_place:
+            if not is_zero:
+                self.is_positive = not self.is_positive
+            return self
+        else:
+            if not is_zero:
+                return self.__class__(*self.digits, is_reversed=False, is_positive=not self.is_positive)
+            return self.copy()
 
     def __abs__(self):
         if self.is_positive:
             return self.copy()
         return self.opposite()
 
-    def next(self):
+    def next(self, in_place=False):
         new_digits = []
         if self == self.__class__(Digits.one, is_positive=False):
             return self.__class__(Digits.zero)
@@ -63,9 +69,12 @@ class Number:
         rtn = rtn.next()
         return rtn.opposite()
 
-    def __add__(self, other):
+    def __add__(self, other, in_place=False):
         counter = self.__class__(Digits.zero)
-        rtn = self.copy()
+        if in_place:
+            rtn = self
+        else:
+            rtn = self.copy()
         while counter != other:
             if other.is_positive:
                 rtn = rtn.next()
@@ -75,7 +84,7 @@ class Number:
                 counter = counter.previous()
         return rtn
 
-    def __mul__(self, other):
+    def __mul__(self, other, in_place=False):
         counter = self.__class__(Digits.zero)
         rtn = self.__class__(Digits.zero)
         if other.is_positive:
