@@ -162,51 +162,75 @@ class Number:
 
     def __str__(self):
         rtn = ""
+
         if not self.is_positive:
             rtn += "negative "
 
+        zillions = [
+            "",
+            "thousand",
+            "million",
+            "billion",
+            "trillion",
+            "quadrillion",
+            "quintillion",
+            "sextillion",
+            "septillion",
+            "octillion",
+            "nontillion",
+            "zillion"
+            ]
         has_hundreds = False
         has_tens = False
-        is_first = True
         is_teen = False
+        is_first = True
+
+        # main iteration
         for index, digit in reversed(list(enumerate(self.digits))):
-            if digit != Digits.zero or is_first or is_teen:
-                if has_hundreds:
-                    rtn += " and"
-                    has_hundreds = False
-                if index % 3 == 1:
-                    if not is_first:
-                        rtn += " "
-                    if digit != Digits.one:
-                        rtn += digit.tens
-                        has_tens = True
-                    else:
-                        is_teen = True
-                else:
-                    if has_tens:
-                        rtn += "-"
-                        has_tens = False
-                    elif not is_first and not is_teen:
-                        rtn += " "
-                    if not is_teen:
-                        rtn += str(digit)
-                    else:
-                        rtn += digit.teen
-                        is_teen = False
-                if index % 3 == 2:
-                    rtn += " hundred"
-                    has_hundreds = True
+            # Skipping zeros
+            if digit == Digits.zero and not(index == 0 and is_first):
+                continue
+
+            # Spacing
+            if is_first:
                 is_first = False
+            else:
+                if has_tens:
+                    rtn += "-"
+                    has_tens = False
+                elif not is_teen:
+                    rtn += " "
+                if has_hundreds:
+                    rtn += "and "
+                    has_hundreds = False
+
+            # hundreds digit
+            if index % 3 == 2:
+                rtn += f"{digit} hundred"
+                has_hundreds = True
+                continue
+
+            # tens digit
+            if index % 3 == 1:
+                if digit == Digits.one:
+                    is_teen = True
+                    continue
+                rtn += digit.tens
+                has_tens = True
+                continue
+
+            # units digit
+            if is_teen:
+                rtn += digit.teen
+                is_teen = False
+            else:
+                rtn += str(digit)
+
+            # zillions
             if index == 0:
                 continue
-            if index == 3:
-                rtn += " thousand,"
-            elif index == 6:
-                rtn += " million,"
-            elif index == 9:
-                rtn += " billion,"
-            elif index % 3 == 0:
-                rtn += " zillion,"
+            rtn += f" {zillions[int(index / 3)]},"
+
         return rtn
 
     def __repr__(self):

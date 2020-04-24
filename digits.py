@@ -1,7 +1,7 @@
 from digit import Digit
 
 
-class Digits():
+class Digits:
     zero = Digit("zero", "", "ten", 0)
     one = Digit("one", "ten", "eleven", 1)
     two = Digit("two", "twenty", "twelve", 2)
